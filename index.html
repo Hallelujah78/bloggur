@@ -5,27 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="index.js"></script>
-
+    <link rel="stylesheet" href="./styles.css">
     <title>Bloggur</title>
 </head>
 
 <form>
-    <label class="title-label" for="title"></label>
+    <label class="title-label" for="title">Blog Title</label>
     <input class="title-input" type="text" name="title">
 
-    <label class="content-label" for="content"></label>
+    <label class="content-label" for="content">Blog Content</label>
     <textarea class="content-input" name="content"></textarea>
 
     <button class="add-blog">Add Blog</button>
 
-    <section id="blog-container">
 
-
-        <div id="blog-pagination"></div>
-    </section>
 
 
 </form>
+
+<section id="blog-container">
+    <div id="blog-article-container"></div>
+
+    <div id="blog-pagination"></div>
+</section>
 
 <body>
 
