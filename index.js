@@ -6,26 +6,32 @@ const titleDOM = document.querySelector(".title-input");
 // Get the text area input.
 const contentDOM = document.querySelector(".content-input");
 // Get the button.
-const addBlogBtn = document.querySelector(".add-blog");
+const addBlogBtn = document.querySelector(".add-blog-btn");
 // Get the container for blog articles.
 const blogArticleContainerDOM = document.getElementById(
   "blog-article-container"
 );
+// Get the form
+const formDOM = document.getElementById("blog-input-form");
 
 // Add event listener to add button.
-addBlogBtn.addEventListener("click", (e) => {
+formDOM.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("hello world");
   // Create an article
   createBlog();
 });
 
-// console.log(contentDOM);
-
 // Create new blog post function
 const createBlog = () => {
-  // get the title
-  // get the content
+  // get the title from form.
+  const titleValue = titleDOM.value;
+  // get the content from the form textarea.
+  const contentValue = contentDOM.value;
+  // Empty check.
+  if (titleValue === "" || contentValue === "") {
+    // if values are empty, warn user they must input title and content.
+  }
+
   // create the article
   const article = document.createElement("article");
   // set article class name
@@ -35,9 +41,9 @@ const createBlog = () => {
   // Create a paragraph for blog content.
   const paragraph = document.createElement("p");
   // Add title text.
-  title.textContent = titleDOM.value;
+  title.textContent = titleValue;
   // Add blog content text.
-  paragraph.textContent = contentDOM.value;
+  paragraph.textContent = contentValue;
   // Append all the elements to the article.
   article.append(title, paragraph);
   // Append the article to the.

@@ -9,15 +9,16 @@
     <title>Bloggur</title>
 </head>
 
-<form>
-    <label class="title-label" for="title">Blog Title</label>
-    <input class="title-input" type="text" name="title">
+<form id="blog-input-form">
+    <div class="form-center">
+        <label class="title-label" for="title">Blog Title</label>
+        <input class="title-input" required type="text" name="title">
 
-    <label class="content-label" for="content">Blog Content</label>
-    <textarea class="content-input" name="content"></textarea>
+        <label class="content-label" for="content">Blog Content</label>
+        <textarea class="content-input" name="content" required></textarea>
 
-    <button class="add-blog">Add Blog</button>
-
+        <button type="submit" class="add-blog-btn">Add Blog</button>
+    </div>
 
 
 
