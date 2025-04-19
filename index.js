@@ -2,7 +2,7 @@
 const articleArray = [];
 
 // Store the page for pagination.
-const pageNum = 1;
+let pageNum = 1;
 
 // Store num items per page.
 const itemsPerPage = 8;
@@ -21,8 +21,12 @@ const blogArticleContainerDOM = document.getElementById(
 const formDOM = document.getElementById("blog-input-form");
 // Get the pagination container
 const paginationDOM = document.getElementById("blog-pagination");
+// Get the "prev" pagination element
+const paginationContent = document.querySelector(".pagination-center");
+// Get the pagination list.
+const paginationNumberList = document.querySelector(".pagination-number-list");
 
-// Add event listener to add button.
+// Add event listener to form.
 formDOM.addEventListener("submit", (e) => {
   e.preventDefault();
   // Create an article
@@ -38,6 +42,18 @@ formDOM.addEventListener("submit", (e) => {
   renderPosts(itemsPerPage, articleArray, pageNum, blogArticleContainerDOM);
   // Update pagination.
   updatePaginationDisplay();
+  // Render pagination.
+  renderPagination();
+});
+
+// Add event listener to the numbered pagination list.
+paginationNumberList.addEventListener("click", (e) => {
+  console.log(e.target);
+  // update the pageNum
+  pageNum = +e.target.id;
+  console.log(pageNum);
+  // Render the posts.
+  renderPosts(itemsPerPage, articleArray, pageNum, blogArticleContainerDOM);
 });
 
 // Function to create new blog post.
@@ -102,4 +118,28 @@ const updatePaginationDisplay = () => {
     return;
   }
   paginationDOM.classList.remove("hide");
+};
+
+// Function to rerender pagination content
+const renderPagination = () => {
+  const pagesRequired = Math.ceil(articleArray.length / itemsPerPage);
+  // empty the list
+  paginationNumberList.innerHTML = "";
+
+  for (let i = 1; i <= pagesRequired; i++) {
+    paginationNumberList.append(createListItem(i));
+  }
+};
+
+// Function to create list item
+const createListItem = (value) => {
+  // Create the list item element.
+  const listItem = document.createElement("li");
+  // Add a class
+  listItem.classList.add("pag-item");
+  // Set the text content.
+  listItem.textContent = value;
+  // set the id
+  listItem.id = value;
+  return listItem;
 };
