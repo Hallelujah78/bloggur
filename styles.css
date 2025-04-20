@@ -86,9 +86,15 @@ ul {
     text-decoration: none;
     list-style: none;
     display: flex;
-    gap: .25rem;
+    gap: .4rem;
+    border: red solid 1px;
 }
 
 .pag-item:hover {
     cursor: pointer;
+}
+
+.current-page {
+    color: red;
+    transform: scale(1.03);
 }

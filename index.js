@@ -48,10 +48,23 @@ formDOM.addEventListener("submit", (e) => {
 
 // Add event listener to the numbered pagination list.
 paginationNumberList.addEventListener("click", (e) => {
-  console.log(e.target);
+  // Get the clicked element.
+  const target = e.target;
+
   // update the pageNum
-  pageNum = +e.target.id;
-  console.log(pageNum);
+  pageNum = +target.id;
+
+  // Get all list items.
+  const paginationItems = document.querySelectorAll(".pag-item");
+
+  // Remove 'current-page' class from all list items.
+  for (pagItem of paginationItems) {
+    pagItem.classList.remove("current-page");
+  }
+
+  // Add class to clicked element to show it is current.
+  target.classList.add("current-page");
+
   // Render the posts.
   renderPosts(itemsPerPage, articleArray, pageNum, blogArticleContainerDOM);
 });
@@ -123,7 +136,7 @@ const updatePaginationDisplay = () => {
 // Function to rerender pagination content
 const renderPagination = () => {
   const pagesRequired = Math.ceil(articleArray.length / itemsPerPage);
-  // empty the list
+  // Empty the list.
   paginationNumberList.innerHTML = "";
 
   for (let i = 1; i <= pagesRequired; i++) {
@@ -141,5 +154,9 @@ const createListItem = (value) => {
   listItem.textContent = value;
   // set the id
   listItem.id = value;
+  // Show that the item is currently selected if value === pageNum
+  if (pageNum === value) {
+    listItem.classList.add("current-page");
+  }
   return listItem;
 };
