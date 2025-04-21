@@ -22,7 +22,9 @@ const formDOM = document.getElementById("blog-input-form");
 // Get the pagination container
 const paginationDOM = document.getElementById("blog-pagination");
 // Get the "prev" pagination element
-const paginationContent = document.querySelector(".pagination-center");
+const paginationPrev = document.querySelector(".prev");
+// Get the "next" pagination element
+const paginationNext = document.querySelector(".next");
 // Get the pagination list.
 const paginationNumberList = document.querySelector(".pagination-number-list");
 
@@ -67,6 +69,8 @@ paginationNumberList.addEventListener("click", (e) => {
 
   // Render the posts.
   renderPosts(itemsPerPage, articleArray, pageNum, blogArticleContainerDOM);
+  // Update pagination.
+  updatePaginationDisplay();
 });
 
 // Function to create new blog post.
@@ -112,12 +116,8 @@ const renderPosts = (itemsPerPage, articleArray, pageNum, container) => {
     startValue = endVal + itemsPerPage - 1;
   }
 
-  console.log("end val: ", endVal);
-  console.log("start val: ", startValue);
-
   // Test.
   for (let i = startValue; i >= endVal; i--) {
-    console.log(i);
     // Append the blog post to the container.
     container.append(articleArray[i]);
   }
@@ -128,9 +128,22 @@ const updatePaginationDisplay = () => {
   // If num blog posts less than or equal to itemsPerPage, hide pagination
   if (articleArray.length <= itemsPerPage) {
     paginationDOM.classList.add("hide");
-    return;
+  } else {
+    paginationDOM.classList.remove("hide");
   }
-  paginationDOM.classList.remove("hide");
+
+  // Hide or show prev.
+  if (pageNum === 1) {
+    paginationPrev.classList.add("hide");
+  } else paginationPrev.classList.remove("hide");
+
+  // Calc pages needed to display blog posts.
+  const pagesRequired = Math.ceil(articleArray.length / itemsPerPage);
+
+  // Hide or show next.
+  if (pageNum === pagesRequired) {
+    paginationNext.classList.add("hide");
+  } else paginationNext.classList.remove("hide");
 };
 
 // Function to rerender pagination content
