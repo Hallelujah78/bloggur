@@ -73,6 +73,26 @@ paginationNumberList.addEventListener("click", (e) => {
   updatePaginationDisplay();
 });
 
+// Add event listener to prev and next options
+paginationPrev.addEventListener("click", () => {
+  if (pageNum < 1) {
+    pageNum = pageNum - 1;
+    // Get all list items.
+    const paginationItems = document.querySelectorAll(".pag-item");
+
+    // Remove 'current-page' class from all list items.
+    for (pagItem of paginationItems) {
+      pagItem.classList.remove("current-page");
+    }
+
+    // Get the pagination number DOM item that is selected.
+    const currentPagItem = document.querySelector(`.pag-item#${pageNum}`);
+    // Add current-page class to selected page item.
+    currentPagItem.classList.add("current-page");
+    console.log(currentPagItem);
+  }
+});
+
 // Function to create new blog post.
 const createBlog = (titleValue, contentValue) => {
   // create the article
