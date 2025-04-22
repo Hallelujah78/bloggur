@@ -35,12 +35,12 @@ formDOM.addEventListener("submit", (e) => {
   const article = createBlog(titleDOM.value, contentDOM.value);
   // Add article to article array.
   articleArray.push(article);
-  // // Reset the title input.
-  // titleDOM.value = "";
-  // // Reset the textarea content
-  // contentDOM.value = "";
-  // Render posts.
+  // Reset the title input.
+  titleDOM.value = "";
+  // Reset the textarea content
+  contentDOM.value = "";
 
+  //Render posts.
   renderPosts(itemsPerPage, articleArray, pageNum, blogArticleContainerDOM);
   // Update pagination.
   updatePaginationDisplay();
@@ -144,7 +144,6 @@ const createBlog = (titleValue, contentValue) => {
 
 // Function to render blog posts.
 const renderPosts = (itemsPerPage, articleArray, pageNum, container) => {
-  console.log("num of articles: ", articleArray.length);
   // Clear the container before rendering.
   container.innerHTML = "";
 
