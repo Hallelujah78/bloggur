@@ -98,3 +98,9 @@ ul {
     color: red;
     transform: scale(1.03);
 }
+
+.next:hover,
+.prev:hover {
+    cursor: pointer;
+    color: blue;
+}

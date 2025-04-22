@@ -73,9 +73,9 @@ paginationNumberList.addEventListener("click", (e) => {
   updatePaginationDisplay();
 });
 
-// Add event listener to prev and next options
+// Add event listener to prev element.
 paginationPrev.addEventListener("click", () => {
-  if (pageNum < 1) {
+  if (pageNum > 1) {
     pageNum = pageNum - 1;
     // Get all list items.
     const paginationItems = document.querySelectorAll(".pag-item");
@@ -86,10 +86,38 @@ paginationPrev.addEventListener("click", () => {
     }
 
     // Get the pagination number DOM item that is selected.
-    const currentPagItem = document.querySelector(`.pag-item#${pageNum}`);
+    const currentPagItem = document.getElementById(`${pageNum}`);
     // Add current-page class to selected page item.
     currentPagItem.classList.add("current-page");
-    console.log(currentPagItem);
+
+    // Render the posts.
+    renderPosts(itemsPerPage, articleArray, pageNum, blogArticleContainerDOM);
+    // Update pagination.
+    updatePaginationDisplay();
+  }
+});
+
+// Add event listener to next element.
+paginationNext.addEventListener("click", () => {
+  if (pageNum < Math.ceil(articleArray.length / itemsPerPage)) {
+    pageNum = pageNum + 1;
+    // Get all list items.
+    const paginationItems = document.querySelectorAll(".pag-item");
+
+    // Remove 'current-page' class from all list items.
+    for (pagItem of paginationItems) {
+      pagItem.classList.remove("current-page");
+    }
+
+    // Get the pagination number DOM item that is selected.
+    const currentPagItem = document.getElementById(`${pageNum}`);
+    // Add current-page class to selected page item.
+    currentPagItem.classList.add("current-page");
+
+    // Render the posts.
+    renderPosts(itemsPerPage, articleArray, pageNum, blogArticleContainerDOM);
+    // Update pagination.
+    updatePaginationDisplay();
   }
 });
 
